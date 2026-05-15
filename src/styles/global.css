@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Manrope Variable', 'Manrope', sans-serif;
+
+  --color-background: hsl(0 0% 4%);
+  --color-foreground: hsl(0 0% 96%);
+
+  --color-card: hsl(0 0% 7%);
+  --color-card-foreground: hsl(0 0% 96%);
+
+  --color-primary: hsl(39 46% 61%);
+  --color-primary-foreground: hsl(0 0% 4%);
+
+  --color-muted: hsl(0 0% 10%);
+  --color-muted-foreground: hsl(0 0% 60%);
+
+  --color-border: hsl(0 0% 16%);
+  --color-surface: hsl(0 0% 7%);
+
+  --radius: 0px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-background);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-foreground);
+    background-color: var(--color-background);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    /* Subtle editorial grain */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background-color: hsl(39 46% 61% / 0.3);
+    color: var(--color-primary);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .border-grid {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, hsl(0 0% 16% / 0.5) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(0 0% 16% / 0.5) 1px, transparent 1px);
+  }
+
+  .fade-up {
+    animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .fade-up-delay-1 { animation-delay: 0.1s; }
+  .fade-up-delay-2 { animation-delay: 0.2s; }
+  .fade-up-delay-3 { animation-delay: 0.3s; }
+  .fade-up-delay-4 { animation-delay: 0.4s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes spinCw  { to { transform: rotate(360deg);  } }
+  @keyframes spinCcw { to { transform: rotate(-360deg); } }
+}

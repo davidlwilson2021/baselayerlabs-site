@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/layout/Nav.astro';
+import Footer from '../components/layout/Footer.astro';
+import Hero from '../components/sections/Hero.astro';
+import Projects from '../components/sections/Projects.astro';
+import Product from '../components/sections/Product.astro';
+import Technology from '../components/sections/Technology.astro';
+import Company from '../components/sections/Company.astro';
+import Contact from '../components/sections/Contact.astro';
+---
+
+<BaseLayout>
+  <Nav />
+  <main>
+    <Hero />
+    <Projects />
+    <Product />
+    <Technology />
+    <Company />
+    <Contact />
+  </main>
+  <Footer />
+</BaseLayout>

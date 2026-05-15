@@ -1,0 +1,142 @@
+---
+---
+
+<section id="contact" class="py-32 relative">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 lg:gap-24">
+
+      <!-- Left: info -->
+      <div>
+        <div class="flex items-center gap-4 mb-6">
+          <div class="h-px w-8" style="background-color: var(--color-primary);"></div>
+          <span class="text-xs font-medium uppercase tracking-[0.2em]" style="color: var(--color-primary);">Engage</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-light mb-8" style="color: var(--color-foreground);">
+          Initiate <span class="font-semibold">Deployment.</span>
+        </h2>
+        <p class="font-light leading-relaxed mb-12 max-w-md" style="color: var(--color-muted-foreground);">
+          Whether you're interested in collaboration, acquiring one of our products, or have a question &mdash; the line is open.
+        </p>
+
+        <div class="space-y-8">
+          <!-- Email -->
+          <div class="flex items-start gap-4">
+            <div class="p-3 border" style="border-color: var(--color-border); background-color: var(--color-card); color: var(--color-primary);">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="text-sm font-medium uppercase tracking-widest mb-1" style="color: var(--color-foreground);">Direct Inlet</h4>
+              <a
+                href="mailto:greyhawkdiesel@gmail.com"
+                class="transition-colors hover:text-[var(--color-primary)]"
+                style="color: var(--color-muted-foreground);"
+              >
+                greyhawkdiesel@gmail.com
+              </a>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="flex items-start gap-4">
+            <div class="p-3 border" style="border-color: var(--color-border); background-color: var(--color-card); color: var(--color-primary);">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="text-sm font-medium uppercase tracking-widest mb-1" style="color: var(--color-foreground);">Operating From</h4>
+              <p style="color: var(--color-muted-foreground);">
+                Remote &mdash; United States<br />Available globally
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <div
+        class="border p-8 md:p-10 relative overflow-hidden"
+        style="background-color: var(--color-card); border-color: var(--color-border);"
+      >
+        <!-- Subtle glow -->
+        <div
+          class="absolute top-0 right-0 w-64 h-64 rounded-full pointer-events-none blur-3xl"
+          style="background-color: hsl(39 46% 61% / 0.05);"
+        ></div>
+
+        <h3 class="text-2xl font-display font-medium mb-8 relative z-10" style="color: var(--color-foreground);">Secure Transmission</h3>
+
+        <form id="contact-form" class="space-y-6 relative z-10">
+          <div class="space-y-2">
+            <label for="name" class="block text-sm font-medium" style="color: var(--color-foreground);">Identification</label>
+            <input
+              id="name" name="name" type="text" placeholder="John Doe" required minlength="2"
+              class="w-full px-4 py-3 text-sm border bg-transparent transition-colors focus:outline-none"
+              style="border-color: var(--color-border); color: var(--color-foreground);"
+              onfocus="this.style.borderColor='var(--color-primary)'"
+              onblur="this.style.borderColor='var(--color-border)'"
+            />
+          </div>
+          <div class="space-y-2">
+            <label for="email" class="block text-sm font-medium" style="color: var(--color-foreground);">Return Channel</label>
+            <input
+              id="email" name="email" type="email" placeholder="john@enterprise.com" required
+              class="w-full px-4 py-3 text-sm border bg-transparent transition-colors focus:outline-none"
+              style="border-color: var(--color-border); color: var(--color-foreground);"
+              onfocus="this.style.borderColor='var(--color-primary)'"
+              onblur="this.style.borderColor='var(--color-border)'"
+            />
+          </div>
+          <div class="space-y-2">
+            <label for="message" class="block text-sm font-medium" style="color: var(--color-foreground);">Payload</label>
+            <textarea
+              id="message" name="message" rows="4" placeholder="Detail your requirements..." required minlength="10"
+              class="w-full px-4 py-3 text-sm border bg-transparent transition-colors focus:outline-none resize-none"
+              style="border-color: var(--color-border); color: var(--color-foreground);"
+              onfocus="this.style.borderColor='var(--color-primary)'"
+              onblur="this.style.borderColor='var(--color-border)'"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="w-full py-4 text-sm font-medium transition-opacity duration-200 hover:opacity-90"
+            style="background-color: var(--color-primary); color: var(--color-primary-foreground);"
+          >
+            Transmit Payload
+          </button>
+        </form>
+
+        <div id="form-success" class="hidden flex-col items-center justify-center text-center h-64 relative z-10">
+          <svg class="w-16 h-16 mb-4" style="color: var(--color-primary);" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <h4 class="text-xl font-medium mb-2" style="color: var(--color-foreground);">Transmission Received</h4>
+          <p style="color: var(--color-muted-foreground);">We'll review your inquiry and respond shortly.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  const form    = document.getElementById('contact-form') as HTMLFormElement;
+  const success = document.getElementById('form-success')!;
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const name    = data.get('name')    as string;
+    const email   = data.get('email')   as string;
+    const message = data.get('message') as string;
+    const subject = encodeURIComponent(`Inquiry from ${name}`);
+    const body    = encodeURIComponent(`${message}\n\n— ${name}\n${email}`);
+    window.location.href = `mailto:greyhawkdiesel@gmail.com?subject=${subject}&body=${body}`;
+    form.classList.add('hidden');
+    success.classList.remove('hidden');
+    success.classList.add('flex');
+  });
+</script>
