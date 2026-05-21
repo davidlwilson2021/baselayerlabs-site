@@ -2,7 +2,7 @@
 
 Marketing and landing page for [Base Layer Labs](https://github.com/davidlwilson2021/baselayerlabs), deployed on Cloudflare Pages.
 
-**Live:** [baselayerlabs.com](https://baselayerlabs.com)
+**Live:** [baselayerlabs](https://baselayerlabs.dev)
 
 ## Stack
 
