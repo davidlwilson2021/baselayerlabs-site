@@ -1,5 +1,108 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
   <rect width="1200" height="630" fill="#0a0a0a"/>
-  <text x="80" y="280" fill="#c9a962" font-family="ui-monospace, monospace" font-size="14" letter-spacing="4">GHOSTSTACK</text>
-  <text x="80" y="360" fill="#f5f5f5" font-family="ui-sans-serif, system-ui" font-size="48" font-weight="300">Serverless EOD reporting</text>
+
+  <!-- Inset frame -->
+  <rect x="18" y="18" width="1164" height="594" stroke="#1e1e1e" stroke-width="1"/>
+
+  <!-- Dot grid pattern -->
+  <defs>
+    <pattern id="dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="14" cy="14" r="1.4" fill="#3a3226"/>
+    </pattern>
+    <!-- Left sparse, right dense: we layer two rect fills at different opacities -->
+  </defs>
+
+  <!-- Background dot field (uniform) -->
+  <rect x="40" y="40" width="1120" height="550" fill="url(#dots)" opacity="0.6"/>
+
+  <!-- Gradient overlay: left dark → right gold-warm (creates the left-sparse / right-dense illusion) -->
+  <defs>
+    <linearGradient id="fieldFade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#0a0a0a" stop-opacity="0.88"/>
+      <stop offset="42%"  stop-color="#0a0a0a" stop-opacity="0.60"/>
+      <stop offset="72%"  stop-color="#0a0a0a" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#0a0a0a" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="goldGlow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#c9a962" stop-opacity="0"/>
+      <stop offset="65%"  stop-color="#c9a962" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#c9a962" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+  <rect x="40" y="40" width="1120" height="550" fill="url(#fieldFade)"/>
+  <rect x="40" y="40" width="1120" height="550" fill="url(#goldGlow)"/>
+
+  <!-- Horizontal register rules (3 lanes) -->
+  <line x1="28" y1="197" x2="1172" y2="197" stroke="#5a4a1e" stroke-width="1"/>
+  <line x1="28" y1="354" x2="1172" y2="354" stroke="#5a4a1e" stroke-width="1"/>
+  <line x1="28" y1="511" x2="1172" y2="511" stroke="#5a4a1e" stroke-width="1"/>
+
+  <!-- EOD threshold vertical rule at 64% -->
+  <line x1="757" y1="30" x2="757" y2="600" stroke="#3d3112" stroke-width="1"/>
+  <line x1="751" y1="30" x2="763" y2="30" stroke="#3d3112" stroke-width="1"/>
+  <line x1="751" y1="600" x2="763" y2="600" stroke="#3d3112" stroke-width="1"/>
+
+  <!-- Report structure bars (right panel, per lane) -->
+  <!-- Lane 1 -->
+  <rect x="778" y="103" width="285" height="2" fill="#584820"/>
+  <rect x="778" y="114" width="205" height="2" fill="#584820"/>
+  <rect x="778" y="125" width="135" height="2" fill="#584820"/>
+  <!-- Lane 2 -->
+  <rect x="778" y="260" width="320" height="2" fill="#584820"/>
+  <rect x="778" y="271" width="240" height="2" fill="#584820"/>
+  <rect x="778" y="282" width="155" height="2" fill="#584820"/>
+  <!-- Lane 3 -->
+  <rect x="778" y="416" width="275" height="2" fill="#584820"/>
+  <rect x="778" y="427" width="200" height="2" fill="#584820"/>
+  <rect x="778" y="438" width="130" height="2" fill="#584820"/>
+  <!-- Lane 4 -->
+  <rect x="778" y="560" width="295" height="2" fill="#584820"/>
+  <rect x="778" y="571" width="180" height="2" fill="#584820"/>
+  <rect x="778" y="582" width="110" height="2" fill="#584820"/>
+
+  <!-- Right edge output columns (dim → bright) -->
+  <rect x="1130" y="40" width="4" height="550" fill="#26200c"/>
+  <rect x="1144" y="40" width="4" height="550" fill="#584820"/>
+  <rect x="1158" y="40" width="4" height="550" fill="#967c42"/>
+  <rect x="1152" y="40" width="4" height="550" fill="#967c42"/>
+
+  <!-- GHOST / STACK ghost letterforms (SVG text, low opacity) -->
+  <text x="36" y="220" font-family="Arial Black, Impact, sans-serif" font-size="220" font-weight="900"
+        fill="white" fill-opacity="0.04" letter-spacing="-4">GHOST</text>
+  <text x="36" y="430" font-family="Arial Black, Impact, sans-serif" font-size="220" font-weight="900"
+        fill="#c9a962" fill-opacity="0.07" letter-spacing="-4">STACK</text>
+
+  <!-- GS·001 catalog label -->
+  <text x="38" y="48" font-family="ui-monospace, Menlo, monospace" font-size="11"
+        fill="#3d3112" letter-spacing="1">GS·001</text>
+
+  <!-- GHOSTSTACK brand mark (top right) -->
+  <text x="868" y="48" font-family="ui-monospace, Menlo, monospace" font-size="15" font-weight="700"
+        fill="#967c42" letter-spacing="2">GHOSTSTACK</text>
+
+  <!-- Sub-brand -->
+  <text x="868" y="64" font-family="ui-monospace, Menlo, monospace" font-size="10"
+        fill="#3d3112" letter-spacing="1">PHANTOM REGISTER  ·  2026</text>
+
+  <!-- EOD label -->
+  <text x="705" y="26" font-family="ui-monospace, Menlo, monospace" font-size="9"
+        fill="#584820" letter-spacing="1">EOD SYNTHESIS</text>
+
+  <!-- Lane labels (right margin, tight) -->
+  <text x="1100" y="126" font-family="ui-monospace, Menlo, monospace" font-size="8"
+        fill="#3d3112" text-anchor="end">TIER 2 SYS ADMIN</text>
+  <text x="1100" y="284" font-family="ui-monospace, Menlo, monospace" font-size="8"
+        fill="#3d3112" text-anchor="end">TECH REQUIREMENTS</text>
+  <text x="1100" y="440" font-family="ui-monospace, Menlo, monospace" font-size="8"
+        fill="#3d3112" text-anchor="end">CYBER GOVERNANCE</text>
+  <text x="1100" y="556" font-family="ui-monospace, Menlo, monospace" font-size="8"
+        fill="#3d3112" text-anchor="end">TRAINING</text>
+
+  <!-- Bottom flow label (centered) -->
+  <text x="600" y="612" font-family="ui-monospace, Menlo, monospace" font-size="11"
+        fill="#584820" letter-spacing="1" text-anchor="middle">RAW INPUT  ·  AI SYNTHESIS  ·  STRUCTURED EOD REPORT</text>
+
+  <!-- Bottom left philosophy mark -->
+  <text x="38" y="612" font-family="ui-monospace, Menlo, monospace" font-size="10"
+        fill="#2a2008" letter-spacing="1">SPECTRAL ORDER</text>
 </svg>
