@@ -11,16 +11,19 @@ interface Props {
   description?: string;
   ogImage?: string;
   ogTitle?: string;
+  jsonLd?: Record<string, unknown>;
 }
 
 const {
   title = 'Base Layer Labs',
   description = 'An engineering studio architecting full-stack platforms and applied data systems. Currently building GhostStack and TradeFolio.',
-  ogImage = '/og/default.png',
+  ogImage = '/og/default.svg',
   ogTitle = title,
+  jsonLd,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://baselayerlabs.dev');
+const ogImageURL = new URL(ogImage, Astro.site ?? 'https://baselayerlabs.dev').href;
 ---
 
 <!doctype html>
@@ -36,13 +39,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://baselaye
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={ogImageURL} />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={ogTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    {jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
 
     <title>{title}</title>
 

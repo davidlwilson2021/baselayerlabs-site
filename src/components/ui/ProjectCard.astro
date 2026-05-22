@@ -2,7 +2,7 @@
 interface Props {
   title: string;
   tagline: string;
-  status: 'live' | 'development' | 'acquired';
+  status: 'live' | 'development' | 'acquired' | 'coursework';
   stack: string[];
   slug: string;
   url?: string;
@@ -14,6 +14,7 @@ const statusConfig = {
   live:        { label: 'Live',        color: 'hsl(142 70% 45%)' },
   development: { label: 'In Dev',      color: 'hsl(39 46% 61%)' },
   acquired:    { label: 'Acquired',    color: 'hsl(220 70% 55%)' },
+  coursework:  { label: 'Validated',   color: 'hsl(200 70% 55%)' },
 } as const;
 
 const badge = statusConfig[status];

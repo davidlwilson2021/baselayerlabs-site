@@ -1,8 +1,11 @@
-# Base Layer Labs — Landing Page
+# Base Layer Labs — Site
 
-Marketing and landing page for [Base Layer Labs](https://github.com/davidlwilson2021/baselayerlabs), deployed on Cloudflare Pages.
+Marketing site and portfolio proof layer for [Base Layer Labs](https://github.com/davidlwilson2021/baselayerlabs), deployed on Cloudflare Pages.
 
-**Live:** [baselayerlabs](https://baselayerlabs.dev)
+**Live:** [baselayerlabs.dev](https://baselayerlabs.dev)  
+**Proof layer:** [baselayerlabs.dev/proof](https://baselayerlabs.dev/proof)
+
+Planning docs and QA live in [notion-portfolio-upgrade](https://github.com/davidlwilson2021/notion-portfolio-upgrade).
 
 ## Stack
 
@@ -10,6 +13,14 @@ Marketing and landing page for [Base Layer Labs](https://github.com/davidlwilson
 - **Styling:** Tailwind CSS v4, PostCSS
 - **Deployment:** Cloudflare Pages (auto-deploy on push to `main`)
 - **CI:** Dependabot for dependency updates
+
+## Routes
+
+| Path | Purpose |
+|------|---------|
+| `/` | Studio marketing (hero, products, technology, contact) |
+| `/proof` | Portfolio proof hub — case studies, metrics, skills |
+| `/projects/*` | Deep-dive case studies (GhostStack, TradeFolio, Wk 6 R pipeline) |
 
 ## Development
 
@@ -24,10 +35,17 @@ npm run preview      # Preview production build locally
 
 ```
 src/
-  components/       # Astro components
-  content/          # Content collections
-  layouts/          # Page layouts
-  pages/            # File-based routing
-  styles/           # Global styles
-public/             # Static assets
+  components/
+    layout/         # Nav, Footer
+    sections/       # Homepage sections
+    sections/proof/ # Proof page sections
+    ui/             # ProjectCard, etc.
+  content/projects/ # Case study markdown + frontmatter
+  layouts/
+  pages/
+    proof.astro
+    projects/[slug].astro
+public/
+  og/               # Open Graph SVGs
+  proof/            # Proof artifacts (replace SVGs with screenshots)
 ```

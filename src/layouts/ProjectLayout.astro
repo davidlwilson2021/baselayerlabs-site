@@ -7,9 +7,10 @@ interface Props {
   title: string;
   description: string;
   ogImage?: string;
+  jsonLd?: Record<string, unknown>;
 }
 
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogImage, jsonLd } = Astro.props;
 ---
 
 <BaseLayout
@@ -17,6 +18,7 @@ const { title, description, ogImage } = Astro.props;
   description={description}
   ogImage={ogImage}
   ogTitle={title}
+  jsonLd={jsonLd}
 >
   <Nav />
   <main>

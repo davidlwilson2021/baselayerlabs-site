@@ -4,56 +4,80 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
-  return projects.map((project) => ({
+  const sorted = projects.sort((a, b) => a.data.order - b.data.order);
+
+  return sorted.map((project, index) => ({
     params: { slug: project.id },
-    props: { project },
+    props: {
+      project,
+      prev: index > 0 ? sorted[index - 1] : null,
+      next: index < sorted.length - 1 ? sorted[index + 1] : null,
+    },
   }));
 }
 
-const { project } = Astro.props;
+const { project, prev, next } = Astro.props;
 const { Content } = await render(project);
 
 const statusConfig = {
   live:        { label: 'Live',        color: 'hsl(142 70% 45%)' },
   development: { label: 'In Development', color: 'hsl(39 46% 61%)' },
   acquired:    { label: 'Acquired',    color: 'hsl(220 70% 55%)' },
+  coursework:  { label: 'Validated',   color: 'hsl(200 70% 55%)' },
 } as const;
 
 const badge = statusConfig[project.data.status];
+const isCoursework = project.data.status === 'coursework';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: project.data.title,
+  description: project.data.tagline,
+  url: `https://baselayerlabs.dev/projects/${project.id}`,
+  author: {
+    '@type': 'Person',
+    name: 'Dave Wilson',
+    url: 'https://baselayerlabs.dev/proof',
+  },
+  keywords: project.data.stack.join(', '),
+};
 ---
 
 <ProjectLayout
   title={project.data.title}
   description={project.data.tagline}
   ogImage={project.data.ogImage}
+  jsonLd={jsonLd}
 >
-  <!-- Back link -->
   <div class="pt-32 pb-8 border-b" style="border-color: var(--color-border);">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <a
-        href="/#work"
+        href="/proof"
         class="inline-flex items-center gap-2 text-sm transition-colors hover:text-[var(--color-primary)]"
         style="color: var(--color-muted-foreground);"
       >
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" d="M19 12H5m7-7-7 7 7 7"/>
         </svg>
-        All Projects
+        Proof Layer
       </a>
     </div>
   </div>
 
-  <!-- Hero -->
   <section class="py-20 border-b" style="border-color: var(--color-border);">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="max-w-3xl">
-
-        <!-- Status -->
         <div class="flex items-center gap-2 mb-6">
           <div class="w-1.5 h-1.5 rounded-full" style={`background-color: ${badge.color};`}></div>
           <span class="text-xs font-medium uppercase tracking-widest" style={`color: ${badge.color};`}>
             {badge.label}
           </span>
+          {project.data.pillar && (
+            <span class="text-xs font-mono ml-2 px-2 py-0.5 border" style="border-color: var(--color-border); color: var(--color-muted-foreground);">
+              {project.data.pillar}
+            </span>
+          )}
         </div>
 
         <h1 class="text-5xl md:text-6xl font-display font-light mb-6 leading-tight" style="color: var(--color-foreground);">
@@ -63,7 +87,6 @@ const badge = statusConfig[project.data.status];
           {project.data.tagline}
         </p>
 
-        <!-- CTAs -->
         <div class="flex flex-wrap gap-4">
           {project.data.url && (
             <a
@@ -98,14 +121,31 @@ const badge = statusConfig[project.data.status];
     </div>
   </section>
 
-  <!-- Details -->
+  {project.data.loomUrl && (
+    <section class="py-12 border-b" style="border-color: var(--color-border);">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="h-px w-6" style="background-color: var(--color-primary);"></div>
+          <span class="text-xs font-medium uppercase tracking-widest" style="color: var(--color-primary);">Demo</span>
+        </div>
+        <div class="relative w-full aspect-video border" style="border-color: var(--color-border);">
+          <iframe
+            src={project.data.loomUrl}
+            title={`${project.data.title} demo video`}
+            class="absolute inset-0 w-full h-full"
+            allow="autoplay; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+  )}
+
   <section class="py-20">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="grid md:grid-cols-12 gap-16">
 
-        <!-- Sidebar -->
         <aside class="md:col-span-4">
-          <!-- Stack -->
           <div class="mb-12">
             <h3 class="text-xs font-medium uppercase tracking-widest mb-4" style="color: var(--color-muted-foreground);">Tech Stack</h3>
             <div class="flex flex-wrap gap-2">
@@ -120,7 +160,6 @@ const badge = statusConfig[project.data.status];
             </div>
           </div>
 
-          <!-- Features -->
           {project.data.features && project.data.features.length > 0 && (
             <div class="mb-12">
               <h3 class="text-xs font-medium uppercase tracking-widest mb-4" style="color: var(--color-muted-foreground);">Key Features</h3>
@@ -135,28 +174,28 @@ const badge = statusConfig[project.data.status];
             </div>
           )}
 
-          <!-- Investor CTA -->
-          <div class="border p-6" style="border-color: var(--color-border); background-color: var(--color-card);">
-            <p class="text-sm font-medium mb-2" style="color: var(--color-foreground);">Interested in acquiring?</p>
-            <p class="text-xs font-light mb-4" style="color: var(--color-muted-foreground);">Get in touch to discuss acquisition or partnership opportunities.</p>
-            <a
-              href="/#contact"
-              class="text-xs font-medium uppercase tracking-wider transition-colors"
-              style="color: var(--color-primary);"
-            >
-              Initiate Contact →
-            </a>
-          </div>
+          {!isCoursework && (
+            <div class="border p-6" style="border-color: var(--color-border); background-color: var(--color-card);">
+              <p class="text-sm font-medium mb-2" style="color: var(--color-foreground);">Interested in acquiring?</p>
+              <p class="text-xs font-light mb-4" style="color: var(--color-muted-foreground);">Get in touch to discuss acquisition or partnership opportunities.</p>
+              <a
+                href="/#contact"
+                class="text-xs font-medium uppercase tracking-wider transition-colors"
+                style="color: var(--color-primary);"
+              >
+                Initiate Contact →
+              </a>
+            </div>
+          )}
         </aside>
 
-        <!-- Main content -->
         <div class="md:col-span-8">
 
           {project.data.problem && (
             <div class="mb-12">
               <div class="flex items-center gap-4 mb-4">
                 <div class="h-px w-6" style="background-color: var(--color-primary);"></div>
-                <span class="text-xs font-medium uppercase tracking-widest" style="color: var(--color-primary);">The Problem</span>
+                <span class="text-xs font-medium uppercase tracking-widest" style="color: var(--color-primary);">Problem</span>
               </div>
               <p class="text-lg font-light leading-relaxed" style="color: var(--color-muted-foreground);">
                 {project.data.problem}
@@ -164,11 +203,28 @@ const badge = statusConfig[project.data.status];
             </div>
           )}
 
+          {project.data.approach && project.data.approach.length > 0 && (
+            <div class="mb-12">
+              <div class="flex items-center gap-4 mb-4">
+                <div class="h-px w-6" style="background-color: var(--color-primary);"></div>
+                <span class="text-xs font-medium uppercase tracking-widest" style="color: var(--color-primary);">Approach</span>
+              </div>
+              <ul class="space-y-3">
+                {project.data.approach.map((item) => (
+                  <li class="flex items-start gap-3 text-base font-light" style="color: var(--color-muted-foreground);">
+                    <div class="mt-2 w-1 h-1 rounded-full flex-shrink-0" style="background-color: var(--color-primary);"></div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {project.data.solution && (
             <div class="mb-12">
               <div class="flex items-center gap-4 mb-4">
                 <div class="h-px w-6" style="background-color: var(--color-primary);"></div>
-                <span class="text-xs font-medium uppercase tracking-widest" style="color: var(--color-primary);">The Solution</span>
+                <span class="text-xs font-medium uppercase tracking-widest" style="color: var(--color-primary);">Solution</span>
               </div>
               <p class="text-lg font-light leading-relaxed" style="color: var(--color-muted-foreground);">
                 {project.data.solution}
@@ -176,16 +232,68 @@ const badge = statusConfig[project.data.status];
             </div>
           )}
 
-          <!-- Rendered markdown body -->
+          {project.data.outcome && (
+            <div class="mb-12 border-l-2 pl-6" style="border-color: var(--color-primary);">
+              <span class="text-xs font-medium uppercase tracking-widest block mb-2" style="color: var(--color-primary);">Outcome</span>
+              <p class="text-lg font-light leading-relaxed" style="color: var(--color-foreground);">
+                {project.data.outcome}
+              </p>
+            </div>
+          )}
+
+          {project.data.proofImage && (
+            <div class="mb-12 border p-4" style="border-color: var(--color-border); background-color: var(--color-card);">
+              <img
+                src={project.data.proofImage}
+                alt={`${project.data.title} proof artifact`}
+                class="w-full h-auto"
+                loading="lazy"
+              />
+            </div>
+          )}
+
           <div
-            class="prose prose-invert prose-lg max-w-none"
+            class="prose prose-invert prose-lg max-w-none mb-12"
             style="--tw-prose-body: var(--color-muted-foreground); --tw-prose-headings: var(--color-foreground);"
           >
             <Content />
           </div>
 
+          {project.data.learned && project.data.learned.length > 0 && (
+            <div class="mb-12">
+              <div class="flex items-center gap-4 mb-4">
+                <div class="h-px w-6" style="background-color: var(--color-primary);"></div>
+                <span class="text-xs font-medium uppercase tracking-widest" style="color: var(--color-primary);">What I Learned</span>
+              </div>
+              <ul class="space-y-3">
+                {project.data.learned.map((item) => (
+                  <li class="text-sm font-light" style="color: var(--color-muted-foreground);">— {item}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
         </div>
       </div>
     </div>
   </section>
+
+  {(prev || next) && (
+    <section class="py-12 border-t" style="border-color: var(--color-border);">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 flex justify-between gap-8">
+        {prev ? (
+          <a href={`/projects/${prev.id}`} class="group text-sm" style="color: var(--color-muted-foreground);">
+            <span class="block text-xs uppercase tracking-widest mb-1">Previous</span>
+            <span class="transition-colors group-hover:text-[var(--color-primary)]">{prev.data.title}</span>
+          </a>
+        ) : <div></div>}
+        {next ? (
+          <a href={`/projects/${next.id}`} class="group text-sm text-right" style="color: var(--color-muted-foreground);">
+            <span class="block text-xs uppercase tracking-widest mb-1">Next</span>
+            <span class="transition-colors group-hover:text-[var(--color-primary)]">{next.data.title}</span>
+          </a>
+        ) : <div></div>}
+      </div>
+    </section>
+  )}
 </ProjectLayout>

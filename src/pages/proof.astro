@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/layout/Nav.astro';
+import Footer from '../components/layout/Footer.astro';
+import ProofHero from '../components/sections/proof/ProofHero.astro';
+import ImpactBento from '../components/sections/proof/ImpactBento.astro';
+import ProofProjects from '../components/sections/proof/ProofProjects.astro';
+import StackSpectrum from '../components/sections/proof/StackSpectrum.astro';
+import AppliedDataScience from '../components/sections/proof/AppliedDataScience.astro';
+import SkillsMatrix from '../components/sections/proof/SkillsMatrix.astro';
+
+const title = 'Dave Wilson · Proof Layer — Base Layer Labs';
+const description =
+  'MS Data Science candidate and solo full-stack studio builder. Case studies for GhostStack, TradeFolio, and multi-model R pipelines — data systems, APIs, and applied AI.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      name: 'Dave Wilson',
+      jobTitle: 'Full-Stack Developer & MS Data Science Candidate',
+      url: 'https://baselayerlabs.dev/proof',
+      sameAs: [
+        'https://github.com/davidlwilson2021',
+        'https://www.linkedin.com/in/davidwilson78/',
+        'https://baselayerlabs.dev',
+      ],
+      worksFor: {
+        '@type': 'Organization',
+        name: 'Base Layer Labs',
+        url: 'https://baselayerlabs.dev',
+      },
+    },
+    {
+      '@type': 'CollectionPage',
+      name: 'Base Layer Labs — Proof Layer',
+      description,
+      url: 'https://baselayerlabs.dev/proof',
+      isPartOf: { '@type': 'WebSite', name: 'Base Layer Labs', url: 'https://baselayerlabs.dev' },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogTitle="Dave Wilson · Proof Layer"
+  ogImage="/og/proof.svg"
+  jsonLd={jsonLd}
+>
+  <Nav />
+  <main>
+    <ProofHero />
+    <ImpactBento />
+    <ProofProjects />
+    <StackSpectrum />
+    <AppliedDataScience />
+    <SkillsMatrix />
+  </main>
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,32 @@
+---
+const layers = [
+  { label: 'Schema', detail: 'DSC530 · PostgreSQL' },
+  { label: 'API', detail: 'TradeFolio · GhostStack' },
+  { label: 'Mobile', detail: 'TradeFolio · Expo' },
+  { label: 'Model', detail: 'Wk 6 R pipeline' },
+  { label: 'Deploy', detail: 'Cloudflare · MLOps' },
+];
+---
+
+<section id="spectrum" class="py-24 border-b" style="border-color: var(--color-border);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="flex items-center gap-4 mb-6">
+      <div class="h-px w-8" style="background-color: var(--color-primary);"></div>
+      <span class="text-xs font-medium uppercase tracking-[0.2em]" style="color: var(--color-primary);">Full-Stack Spectrum</span>
+    </div>
+    <p class="text-lg font-light mb-10 max-w-2xl" style="color: var(--color-muted-foreground);">
+      Schema, API, mobile, model, and deploy — designed as one continuous system, not assembled from defaults.
+    </p>
+    <div class="flex flex-wrap gap-3 items-center">
+      {layers.map((layer) => (
+        <div
+          class="border px-4 py-3 flex flex-col min-w-[120px]"
+          style="border-color: var(--color-border); background-color: var(--color-card);"
+        >
+          <span class="text-[11px] font-mono uppercase tracking-widest mb-1" style="color: var(--color-primary);">{layer.label}</span>
+          <span class="text-xs font-light" style="color: var(--color-muted-foreground);">{layer.detail}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

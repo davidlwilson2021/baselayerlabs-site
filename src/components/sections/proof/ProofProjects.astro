@@ -1,27 +1,24 @@
 ---
 import { getCollection } from 'astro:content';
-import ProjectCard from '../ui/ProjectCard.astro';
+import ProjectCard from '../../ui/ProjectCard.astro';
 
-const allProjects = await getCollection('projects');
-const projects = allProjects
-  .filter((p) => p.data.status !== 'coursework')
+const projects = (await getCollection('projects'))
+  .filter((p) => p.data.featured)
   .sort((a, b) => a.data.order - b.data.order);
 ---
 
-<section id="work" class="py-32 relative border-t" style="border-color: var(--color-border);">
+<section id="featured-work" class="py-32 border-b" style="border-color: var(--color-border);">
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
-
     <div class="mb-16">
       <div class="flex items-center gap-4 mb-6">
         <div class="h-px w-8" style="background-color: var(--color-primary);"></div>
-        <span class="text-xs font-medium uppercase tracking-[0.2em]" style="color: var(--color-primary);">Work</span>
+        <span class="text-xs font-medium uppercase tracking-[0.2em]" style="color: var(--color-primary);">Featured Work</span>
       </div>
       <h2 class="text-4xl md:text-5xl font-display font-light" style="color: var(--color-foreground);">
-        Products in the <span class="font-semibold" style="color: var(--color-primary);">Field.</span>
+        Case studies with <span class="font-semibold" style="color: var(--color-primary);">technical depth.</span>
       </h2>
     </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {projects.map((project) => (
         <ProjectCard
           title={project.data.title}
@@ -33,6 +30,5 @@ const projects = allProjects
         />
       ))}
     </div>
-
   </div>
 </section>
