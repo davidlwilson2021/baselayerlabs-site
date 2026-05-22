@@ -19,7 +19,7 @@
     "@fontsource/inter": "^5.0.0",
     "@tailwindcss/postcss": "^4.3.0",
     "astro": "^6.3.3",
-    "postcss": "^8.5.14"
+    "postcss": "^8.5.15"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.0",
