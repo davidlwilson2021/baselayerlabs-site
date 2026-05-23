@@ -3,7 +3,7 @@ const year = new Date().getFullYear();
 
 const surface = [
   { name: 'Capabilities', href: '/#product' },
-  { name: 'Proof',        href: '/proof' },
+  { name: 'Portfolio',    href: 'https://portfolio.baselayerlabs.dev', external: true },
   { name: 'Technology',   href: '/#technology' },
   { name: 'Studio',       href: '/#company' },
   { name: 'Contact',      href: '/#contact' },
@@ -48,10 +48,17 @@ const connect = [
             <li>
               <a
                 href={link.href}
-                class="text-sm transition-colors hover:text-[var(--color-primary)]"
+                target={link.external ? '_blank' : undefined}
+                rel={link.external ? 'noopener noreferrer' : undefined}
+                class="text-sm transition-colors hover:text-[var(--color-primary)] inline-flex items-center gap-1"
                 style="color: var(--color-muted-foreground);"
               >
                 {link.name}
+                {link.external && (
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" d="M7 17L17 7M17 7H7M17 7v10" />
+                  </svg>
+                )}
               </a>
             </li>
           ))}
