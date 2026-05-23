@@ -14,6 +14,19 @@ Read it fully before making any suggestions or changes.
 
 ---
 
+## Featured Projects
+
+The site's `/proof` and `/projects/*` routes showcase these projects. Use the correct names when writing content, case studies, or code:
+
+| Project | Repo | In-app / product name | Description |
+|---------|------|-----------------------|-------------|
+| GhostStack | `davidlwilson2021/ghoststack` | **G6 OPS DISPATCH** | Daily ops platform for IT staff — log tasks by category, AI-generated EOD email, Slack integration, auto-scheduling. Live at `ghoststack.pages.dev`. |
+| TradeFolio | `davidlwilson2021/tradefolio-beta-app` | TradeFolio | Skilled trades portfolio + marketplace (LinkedIn × Houzz for tradespeople). React Native + Expo + NestJS + GraphQL. |
+
+**Important:** When writing copy, case study content, or `src/content/projects/` markdown, refer to GhostStack's product as **G6 OPS DISPATCH** — that is the brand shown in the live app UI. "GhostStack" is the repo/project name used in code and config.
+
+---
+
 ## Tech Stack
 
 | Layer | Technology |
@@ -169,4 +182,4 @@ No adapter. No output setting. This is correct for a static Cloudflare Pages dep
 
 ---
 
-*Last updated: 2026-05-15*
+*Last updated: 2026-05-23*
