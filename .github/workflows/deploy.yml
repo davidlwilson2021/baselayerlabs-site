@@ -24,4 +24,5 @@ jobs:
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 9582c85e69f921d99a4473d79ec64ca9
           command: pages deploy dist --project-name baselayerlabs
