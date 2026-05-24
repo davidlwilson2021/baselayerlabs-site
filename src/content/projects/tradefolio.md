@@ -17,7 +17,7 @@ approach:
   - TypeORM entity-driven schema with strict relational constraints; synchronize locked to development environments only
   - JWT authentication enforced at startup — JWT_SECRET missing throws at boot, no silent dev-secret fallback in any environment
   - Rate limiting on auth mutations and CORS locked to known origins for production hardening
-  - Role-based access control across three actor types: tradesperson, client, and admin
+  - "Role-based access control across three actor types: tradesperson, client, and admin"
 outcome: A production-hardened full-stack monorepo with a code-first GraphQL API, JWT-secured authentication, and a React Native mobile client — built to prove that domain-correct architecture decisions pay dividends before the first feature ships.
 learned:
   - Security belongs at architecture time — JWT secret enforcement at startup, rate limiting at the resolver layer, and synchronize:false in production are not retrofits, they're decisions
