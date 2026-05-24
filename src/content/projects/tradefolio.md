@@ -7,7 +7,6 @@ featured: true
 order: 2
 pillar: Dev
 ogImage: /og/tradefolio.svg
-proofImage: /proof/tradefolio-preview.svg
 githubUrl: https://github.com/davidlwilson2021/tradefolio-beta-app
 problem: Skilled tradespeople need a modern way to present verified work history, portfolio artifacts, and marketplace-ready identity in one place.
 solution: TradeFolio is a mobile-first platform where tradespeople build a verified portfolio of completed work, earn credentialed reviews, and connect directly with property owners and contractors looking to hire — with type-safe boundaries from schema to mobile surface.
@@ -35,30 +34,5 @@ features:
 TradeFolio addresses a gap in professional identity infrastructure for the skilled trades sector — a $700B+ industry where the primary hiring signal is still word-of-mouth. Platforms like Angi generate leads but don't build professional identity. LinkedIn doesn't map to trades workflows. The result is that hiring decisions worth thousands of dollars still route through referrals and unverified reviews on general-purpose sites.
 
 The technical approach starts at the schema. A code-first GraphQL API means the data contract is defined in TypeScript and NestJS decorators — the schema is never hand-maintained separately from the types. TypeORM entities enforce relational integrity at the ORM layer: a `PortfolioEntry` cannot exist without an owning `User`, a `Review` cannot be created without a linked completed job. This constraint-first thinking is built into the entity design, not added as validation logic later.
-
-```typescript
-// NestJS code-first GraphQL — contract defined in TypeScript, not IDL
-@ObjectType()
-export class PortfolioEntry {
-  @Field(() => ID)
-  id: string;
-
-  @Field()
-  title: string;
-
-  @Field(() => TradeCategory)
-  trade: TradeCategory;
-
-  @Field(() => [String])
-  mediaUrls: string[];
-
-  @Field()
-  verified: boolean;
-
-  @ManyToOne(() => User, (user) => user.portfolioEntries)
-  @Field(() => User)
-  owner: User;
-}
-```
 
 Security is treated as an architecture concern, not a post-launch checklist. JWT secrets are required at startup — the server throws on boot if `JWT_SECRET` is not set, with no silent fallback. Auth mutations are rate-limited at the resolver layer via `@nestjs/throttler`. CORS is locked to known origin URLs. TypeORM `synchronize` is disabled outside development. These aren't afterthoughts; they reflect what production-oriented architecture looks like when you're the only engineer on the stack.
