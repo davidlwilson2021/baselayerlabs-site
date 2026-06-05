@@ -18,7 +18,7 @@
     "@fontsource-variable/manrope": "^5.0.0",
     "@fontsource/inter": "^5.0.0",
     "@tailwindcss/postcss": "^4.3.0",
-    "astro": "^6.3.3",
+    "astro": "^6.4.4",
     "postcss": "^8.5.14"
   },
   "devDependencies": {
